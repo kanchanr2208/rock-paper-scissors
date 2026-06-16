@@ -5,23 +5,23 @@
     <meta name="viewport" content="width=device-width" initial-scale=1.0">
     <title>Rock Paper Scissors</title>
      <link rel="stylesheet" href="style.css">
-    <!--<script src="script.js" defer></script>-->
+    <script src="script.js" defer></script>
 </head>
 <body>
-   <h1>Round 1</h1>
+   <h1>Round <span>1</span></h1>
    <div class="scoreboard">
         <h3>Your Score : <span>0</span></h3>
         <h3>Computer's Score: <span>0</span></h3>
    </div>
    <h4>Make your choice:</h4>
-   <div class="user-options">
-        <button>Rock</button>
-        <button>Paper</button>
-        <button>Scissors</button>
+   <div class="user-options" id="user-options-div">
+        <button id="rock" value="rock">Rock</button>
+        <button id="paper" value="paper">Paper</button>
+        <button id="scissors" value="scissors">Scissors</button>
    </div>
    <div class="choices-display">
-        <h4>You Chose: <span>____</span></h4>
-        <h4>Computer Chose: <span>____</span></h4>
+        <h4>You Chose: <span class="user-choice">_______</span></h4>
+        <h4>Computer Chose: <span>________</span></h4>
    </div>
    <h4><span>_____</span> beats <span>_____</span></h4>
    <h4><span>____</span> won this round.</h4>

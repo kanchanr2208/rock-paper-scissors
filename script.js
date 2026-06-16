@@ -1,7 +1,47 @@
-let humanScore = 0;
-    let computerScore = 0;
 
-    
+
+let userSelection = "";
+
+let rock = document.querySelector("#rock");
+let paper = document.querySelector("#paper");
+let scissors = document.querySelector("#scissors");
+
+let userChoice = document.querySelector(".user-choice");
+
+let userSelectionDiv = document.querySelector("#user-options-div");
+
+userSelectionDiv.addEventListener("click", e => {
+    e.preventDefault();
+    userSelection = e.target.value;
+    console.log(userSelection);
+    userChoice.textContent = String(userSelection);
+
+    switch (userSelection) {
+        case "rock": 
+            paper.disabled = true;
+            scissors.disabled = true;
+
+            break;
+
+        case "paper":
+            rock.disabled = true;
+            scissors.disabled = true;
+            break;
+        
+        case "scissors": 
+            rock.disabled = true;
+            paper.disabled = true;
+            break;
+    }
+
+})
+
+
+   
+
+/*
+    let humanScore = 0;
+    let computerScore = 0;
 
     function userChoice(a) {
         if (a == 1) {
@@ -77,3 +117,5 @@ let humanScore = 0;
     }
 
     playGame();
+
+*/
