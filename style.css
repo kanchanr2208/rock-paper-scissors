@@ -22,14 +22,18 @@ h4 {
     padding: 1%;
 }
 
-.user-choice {
+.user-choice, 
+.computer-choice {
     text-transform: capitalize;
 }
 
 .choices-display {
     display: flex;
     justify-content: space-around;
-    padding: 1%;
+}
+
+.round-result-explanation {
+    margin: 0;
 }
 
 button {
@@ -37,9 +41,5 @@ button {
     margin: 0 auto;
     font-size: 1.3em;
     font-weight: 900;
-}
-
-.scoreboard-message {
-    display: flex;
-    justify-content: space-around;
+    margin-top: 5vh;
 }

@@ -8,10 +8,10 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-   <h1>Round <span>1</span></h1>
+   <h1>Round <span class="round-number">1</span> out of 5</h1>
    <div class="scoreboard">
-        <h3>Your Score : <span>0</span></h3>
-        <h3>Computer's Score: <span>0</span></h3>
+        <h3>Your Score : <span class="user-score-display"></span></h3>
+        <h3>Computer's Score: <span class="compter-score-display"></span></h3>
    </div>
    <h4>Make your choice:</h4>
    <div class="user-options" id="user-options-div">
@@ -21,17 +21,15 @@
    </div>
    <div class="choices-display">
         <h4>You Chose: <span class="user-choice">_______</span></h4>
-        <h4>Computer Chose: <span>________</span></h4>
+        <h4>Computer Chose: <span class="computer-choice">________</span></h4>
    </div>
-   <h4><span>_____</span> beats <span>_____</span></h4>
-   <h4><span>____</span> won this round.</h4>
-   <button>Play Next Round</button>
+   <h4 class="round-result-explanation">____</h4>
+   <h4 class="round-result"><span class="round-winner">____</span> won this round.</h4>
 
-   <div class="scoreboard-message">
-    <h4>You won <span>0</span> out of 5 rounds</h4>
-    <h4>Computer won <span>0</span> out of 5 rounds</h4>
-   </div>
-   <h4><span>___</span> wins the game!</h4>
+   <button id="play-next-round">Play Next Round</button>
+   
+   <h4 class="scoreboard-message"><span class="winner">___</span> wins the game!</h4>
+   
    
 </body>
 </html>

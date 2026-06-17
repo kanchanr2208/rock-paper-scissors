@@ -1,121 +1,164 @@
-
-
 let userSelection = "";
+let computerSelection = "";
+let roundWinnerName = document.querySelector(".round-winner")
+
+
+let userScore = 0;
+let computerScore = 0;
+let round = 1;
+
+let userScoreDisplay = document.querySelector(".user-score-display");
+let computerScoreDisplay = document.querySelector(".compter-score-display");
+
+userScoreDisplay.textContent = userScore;
+computerScoreDisplay.textContent = computerScore;
+
+
+let userChoice = document.querySelector(".user-choice");
+let computerChoice = document.querySelector(".computer-choice");
+
+let userSelectionDiv = document.querySelector("#user-options-div");
+
+let roundResultExplanation = document.querySelector(".round-result-explanation");
+roundResultExplanation.style.display = "none";
+
+let choicesDisplay = document.querySelector(".choices-display");
+choicesDisplay.style.display = "none";
+
+
+let playNextRound = document.querySelector("#play-next-round");
+playNextRound.style.display = "none";
+
+let scoreboardMessage = document.querySelector(".scoreboard-message");
+scoreboardMessage.style.display = "none";
+
+let winner = document.querySelector(".winner");
+
+let roundResult = document.querySelector(".round-result");
+roundResult.style.display = "none";
 
 let rock = document.querySelector("#rock");
 let paper = document.querySelector("#paper");
 let scissors = document.querySelector("#scissors");
 
-let userChoice = document.querySelector(".user-choice");
+let roundNumber = document.querySelector(".round-number");
 
-let userSelectionDiv = document.querySelector("#user-options-div");
+function usersPick() {
+    userSelectionDiv.addEventListener("click", e => {
+        e.preventDefault();
+        userSelection = e.target.value;
+        userChoice.textContent = String(userSelection);
+        rock.disabled = true;
+        paper.disabled = true;
+        scissors.disabled = true;
 
-userSelectionDiv.addEventListener("click", e => {
-    e.preventDefault();
-    userSelection = e.target.value;
-    console.log(userSelection);
-    userChoice.textContent = String(userSelection);
+        computersPick();
+        roundWinner(userSelection, computerSelection)
 
-    switch (userSelection) {
-        case "rock": 
-            paper.disabled = true;
-            scissors.disabled = true;
+    })
+}
 
-            break;
+function computersPick() {
+    let randomNumber = Math.floor(Math.random()*3) + 1;
 
-        case "paper":
-            rock.disabled = true;
-            scissors.disabled = true;
+    switch(randomNumber) {
+        case 1:
+            computerSelection = "rock";
+            computerChoice.textContent = "rock";
             break;
         
-        case "scissors": 
-            rock.disabled = true;
-            paper.disabled = true;
+        case 2:
+            computerSelection = "paper";
+            computerChoice.textContent = "paper";
+            break;
+        
+        case 3: 
+            computerSelection = "scissors";
+            computerChoice.textContent = "scissors";
             break;
     }
+    console.log(computerSelection)
+    return(computerSelection);
 
-})
+}
+
+function roundWinner(user, computer) {
+    roundResultExplanation.style.display = "block";
+    choicesDisplay.style.display = "flex";
+    roundResult.style.display = "block";
+    playNextRound.style.display = "block";
+
+    if (user == computer) {
+        roundResultExplanation.textContent = "You both chose " + user + ". This game is a draw. This round will be replayed." 
+        roundWinnerName.textContent= "No one";
+
+    } else if (user == "rock" && computer == "paper") {
+        roundResultExplanation.textContent = computer + " covers " + user + "."
+        computerScore = computerScore + 1;
+        roundWinnerName.textContent = "Computer";
+        round = round + 1;
 
 
-   
+    } else if (user == "rock" && computer == "scissors") {
+        roundResultExplanation.textContent = user + " breaks " + computer + "."
+        userScore = userScore + 1;
+        roundWinnerName.textContent = "You";
+        round = round + 1;
 
-/*
-    let humanScore = 0;
-    let computerScore = 0;
+    } else if (user == "paper" && computer == "rock") {
+        roundResultExplanation.textContent = user + " covers " + computer + "."
+        userScore = userScore + 1;
+        roundWinnerName.textContent = "You";
+        round = round + 1;
 
-    function userChoice(a) {
-        if (a == 1) {
-            console.log("You Chose Rock");
-        } else if (a == 2) {
-            console.log ("You Chose Paper");
-        } else if (a == 3) {
-            console.log("You Chose Scissors");
-        } else {
-            alert("Undesirable entry. Please enter 1, 2, or 3.")
-        }
+    } else if (user == "paper" && computer == "scissors") {
+        roundResultExplanation.textContent = computer + " cut " + user + "."
+        computerScore = computerScore + 1;
+        roundWinnerName.textContent = "Computer";
+        round = round + 1;
+
+    } else if (user == "scissors" && computer == "rock") {
+        roundResultExplanation.textContent = computer + " breaks " + user + "."
+        computerScore = computerScore + 1;
+        roundWinnerName.textContent = "Computer";
+        round = round + 1;
+
+    } else if (user == "scissors" && computer == "paper") {
+        roundResultExplanation.textContent = user + " cut " + computer + "."
+        userScore = userScore + 1;
+        roundWinnerName.textContent = "You";
+        round = round + 1;
     }
+    userScoreDisplay.textContent = userScore;
+    computerScoreDisplay.textContent = computerScore;  
 
-    function computerChoice(b) {
-        if (b == 1) {
-            console.log("Computer chose Rock");
-        } else if (b == 2) {
-            console.log("Computer chose Paper");
-        } else if (b == 3) {
-            console.log("Computer Chose Scissors");
-        } else {
-            console.log ("This is Random");
-        }
-    }
-
-    function playRound(a, b, c) {
-        computerChoice(a);
-        userChoice(b);
-
-        if (a == b) {
-            console.log("Round " + c + " Result: Draw");
-        } else if (a == 1 && b == 2) {
-            console.log("Round " + c + " Result: You Win");
-            humanScore = humanScore + 1;
-
-        } else if (a == 1 && b == 3) {
-            console.log("Round " + c + " Result: Computer Wins");
-            computerScore = computerScore + 1;
-
-        } else if (a == 2 && b == 1) {
-            console.log("Round " + c + " Result: Computer Wins");
-            computerScore = computerScore + 1;
-
-        } else if (a == 2 && b == 3) {
-            console.log("Round " + c + " Result: You Win");
-            humanScore = humanScore + 1;
-
-        } else if (a == 3 && b == 1) {
-            console.log("Round " + c + " Result: You Win");  
-            humanScore = humanScore + 1;
-
-        } else if (a == 3 && b == 2) {
-            console.log("Round " + c + " Result: Computer Wins");
-            computerScore = computerScore + 1;
-
-        } else {
-            console.log("Not sure what happened. Lets reset this game.");
-            return;
+    if (round > 5) {
+        playNextRound.disabled = true;
+        scoreboardMessage.style.display = "flex";
+        
+        if (userScore > computerScore) {
+            winner.textContent = "You";
+        } else if (computerScore > userScore) {
+            winner.textContent = "Computer";
         }
     }
     
-    function playGame() {
-        for (let i = 1; i <= 5;  i++) {
-            let computerNumber = Math.floor(Math.random()*3) + 1;
-            let humanNumber = Number(prompt("Round " + i + ". Enter your Number: 1 represents Rock, 2 represents Paper, 3 represents Scissors"));
-            playRound(computerNumber, humanNumber, i);
-        }
-        if (humanScore > computerScore) {
-            console.log("You win the game.");
-        } else if (computerScore > humanScore) {
-            console.log("Computer wins the game");
-        } else console.log("The game was a draw.")
-    }
+}
 
-    playGame();
+usersPick();
 
-*/
+
+playNextRound.addEventListener("click", e => {
+    e.preventDefault();
+    roundNumber.textContent = round;
+    roundResult.style.display = "none";
+    scoreboardMessage.style.display = "none";
+    playNextRound.style.display = "none";
+    roundResultExplanation.style.display = "none";
+    choicesDisplay.style.display = "none";
+    rock.disabled = false;
+    paper.disabled = false;
+    scissors.disabled = false;
+})
+
+
