@@ -43,3 +43,6 @@ button {
     font-weight: 900;
     margin-top: 5vh;
 }
+.scoreboard-message {
+    display: block;
+}
